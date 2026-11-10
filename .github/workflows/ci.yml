@@ -27,16 +27,16 @@ jobs:
         with:
           name: junit
           path: |
-            target/surefire-reports/TEST-*.xml
-            target/failsafe-reports/TEST-*.xml
+            workflow-automation/examples/maven-app/target/surefire-reports/TEST-*.xml
+            workflow-automation/examples/maven-app/target/failsafe-reports/TEST-*.xml
           if-no-files-found: error
           retention-days: 7
       - name: Preserve coverage when available
-        if: always() && hashFiles('target/site/jacoco/index.html') != ''
+        if: always() && hashFiles('workflow-automation/examples/maven-app/target/site/jacoco/index.html') != ''
         uses: actions/upload-artifact@v7
         with:
           name: coverage
-          path: target/site/jacoco/
+          path: workflow-automation/examples/maven-app/target/site/jacoco/
           if-no-files-found: error
           retention-days: 7
       - name: Record the artifact checksum
@@ -45,7 +45,7 @@ jobs:
         with:
           name: application
           path: |
-            target/contdel-app-1.0-SNAPSHOT.jar
-            target/application.sha256
+            workflow-automation/examples/maven-app/target/contdel-app-1.0-SNAPSHOT.jar
+            workflow-automation/examples/maven-app/target/application.sha256
           if-no-files-found: error
           retention-days: 7
